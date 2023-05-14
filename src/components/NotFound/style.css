@@ -1,0 +1,80 @@
+.not-found {
+    position: relative;
+    height: 100vh;
+}
+
+.not-found .not-found__body {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.not-found__body {
+    max-width: 910px;
+    width: 100%;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.not-found__body .not-found__404 {
+    position: relative;
+    height: 200px;
+}
+
+.not-found__body .not-found__404 h1 {
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 220px;
+    font-weight: 900;
+    padding-bottom: 10px;
+    color: #dc3545;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+}
+
+.not-found__body h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: capitalize;
+    color: #000;
+    padding: 30px 0;
+}
+
+
+.not-found__body .not-found__btn {
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    font-weight: 600;
+    border: none;
+    text-transform: uppercase;
+    padding: 15px 30px;
+    font-size: .9em;
+    border-radius: 80px;
+    margin: 7px;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+    letter-spacing: .04em;
+}
+
+.not-found__body .not-found__btn:hover {
+    opacity: 0.9;
+}
+
+.not-found__body .not-found__btn {
+    color: #fbfbfb;
+    background: #dc3545;
+}
+
+.not-found__link {
+    text-decoration: none;
+    color: #000;
+}

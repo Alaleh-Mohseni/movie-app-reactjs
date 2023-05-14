@@ -1,0 +1,17 @@
+.modal-register {
+    width: 30%;
+    background-color: #ffffff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease-out;
+    padding: 16px;
+    z-index: 1023;
+}
+
+@media (max-width: 60rem) {
+    .modal-register {
+        width: 85%;
+    }
+}

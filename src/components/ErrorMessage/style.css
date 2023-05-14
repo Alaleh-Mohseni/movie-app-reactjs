@@ -1,0 +1,46 @@
+.error {
+  width: 300px;
+  margin: 100px auto;
+  padding: 40px;
+  display: inline-block;
+  vertical-align: top;
+
+  box-shadow: 0 0 10px 1px #c8c8c8;
+  border-radius: 20px;
+  color: #fbfbfb;
+}
+
+.error h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  text-align: center;
+  color: darken(#dc3545, 30);
+  text-shadow: 0 0 1px lighten(#dc3545, 20);
+}
+
+.error-btn,
+.error {
+  background-color: #dc3545;
+}
+
+.error-btn {
+  width: 100%;
+  margin-top: 30px;
+  padding: 15px 10px;
+  cursor: pointer;
+
+  border: 4px solid #fbfbfb;
+  border-radius: 80px;
+
+  color: #fbfbfb;
+  font-size: .9em;
+  font-weight: bold;
+  line-height: 1em;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.error-btn:hover {
+  background-color: #fbfbfb;
+  color: #dc3545;
+}

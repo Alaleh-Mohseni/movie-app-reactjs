@@ -1,0 +1,9 @@
+.title__text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.genre__page {
+    min-height: 100vh;
+}
