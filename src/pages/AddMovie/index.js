@@ -1,51 +1,58 @@
 import { useState } from "react";
-import axios from "axios";
-import "./style.css"
+import { httpClient } from "../../services/Http";
+import { ADDMOVIE } from "../../config/api-endpoints";
+
 
 const AddMovie = () => {
-    const [newMovie, setNewMovie] = useState({
-        title: '',
-        // poster: '',
-        year: '',
-        director: '',
-        country: '',
-        rating: '',
-        votes: '',
-        id: '',
-    })
 
-    const handleInputs = (name, value) => {
-        setNewMovie({
-            ...newMovie,
-            [name]: value,
-        });
-    };
+    const [title, setTitle] = useState('')
+    const [id, setId] = useState('')
+    const [poster, setPoster] = useState('')
+    const [year, setYear] = useState('')
+    const [votes, setVotes] = useState('')
+    const [rating, setRating] = useState('')
+    const [country, setCountry] = useState('')
+    const [director, setDirector] = useState('')
+
+
+    const getHandler = (setter) => {
+        return function handler(e) {
+            setter(e.target.value)
+        }
+    }
 
 
     const handleAddMovie = (e) => {
         e.preventDefault();
 
-        const data = {
-            title: newMovie.title,
-            // poster: newMovie.poster,
-            year: newMovie.year,
-            director: newMovie.director,
-            country: newMovie.country,
-            imdb_rating: newMovie.rating,
-            imdb_votes: newMovie.votes,
-            imdb_id: newMovie.id,
+        const addNewMovie = async () => {
+            try {
+                const data = {
+                    title: title,
+                    poster: poster,
+                    year: year,
+                    director: director,
+                    country: country,
+                    imdb_rating: rating,
+                    imdb_votes: votes,
+                    imdb_id: id,
+                }
+
+                const response = await httpClient.post(ADDMOVIE, data)
+                console.log('response', response)
+
+            } catch (error) {
+                console.log(error);
+            }
         }
 
-        axios.post(`https://moviesapi.ir/api/v1/movies`, data)
-            .then((response) => {
-                console.log('res', response)
-            })
+        addNewMovie()
     }
 
 
     return (
         <div className="container">
-            <div className="row justify-content-center align-items-center add__movie">
+            <div className="row justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                 <div className="col-md-9 col-lg-7 border border-light shadow-sm p-5">
                     <h4 className="mb-3 text-center">Add Movie</h4>
                     <form className="needs-validation">
@@ -57,8 +64,8 @@ const AddMovie = () => {
                                     name="title"
                                     className="form-control"
                                     id="title"
-                                    value={newMovie.title}
-                                    onChange={({ target }) => handleInputs(target.name, target.value)}
+                                    value={title}
+                                    onChange={getHandler(setTitle)}
                                 />
                             </div>
 
@@ -69,8 +76,8 @@ const AddMovie = () => {
                                     name="director"
                                     className="form-control"
                                     id="director"
-                                    value={newMovie.director}
-                                    onChange={({ target }) => handleInputs(target.name, target.value)}
+                                    value={director}
+                                    onChange={getHandler(setDirector)}
                                 />
                             </div>
 
@@ -81,8 +88,8 @@ const AddMovie = () => {
                                     name="country"
                                     className="form-control"
                                     id="country"
-                                    value={newMovie.country}
-                                    onChange={({ target }) => handleInputs(target.name, target.value)}
+                                    value={country}
+                                    onChange={getHandler(setCountry)}
                                 />
                             </div>
 
@@ -93,8 +100,8 @@ const AddMovie = () => {
                                     name="year"
                                     className="form-control"
                                     id="year"
-                                    value={newMovie.year}
-                                    onChange={({ target }) => handleInputs(target.name, target.value)}
+                                    value={year}
+                                    onChange={getHandler(setYear)}
                                 />
                             </div>
 
@@ -105,8 +112,8 @@ const AddMovie = () => {
                                     name="rating"
                                     className="form-control"
                                     id="rating"
-                                    value={newMovie.rating}
-                                    onChange={({ target }) => handleInputs(target.name, target.value)}
+                                    value={rating}
+                                    onChange={getHandler(setRating)}
                                 />
                             </div>
 
@@ -117,8 +124,8 @@ const AddMovie = () => {
                                     name="id"
                                     className="form-control"
                                     id="idimdb"
-                                    value={newMovie.id}
-                                    onChange={({ target }) => handleInputs(target.name, target.value)}
+                                    value={id}
+                                    onChange={getHandler(setId)}
                                 />
                             </div>
 
@@ -129,8 +136,21 @@ const AddMovie = () => {
                                     name="votes"
                                     className="form-control"
                                     id="vote"
-                                    value={newMovie.votes}
-                                    onChange={({ target }) => handleInputs(target.name, target.value)}
+                                    value={votes}
+                                    onChange={getHandler(setVotes)}
+                                />
+                            </div>
+
+                            <div className="col-md-12 mb-2">
+                                <label htmlFor="poster" className="form-label">Poster</label>
+                                <input
+                                    type="file"
+                                    name="poster"
+                                    className="form-control"
+                                    id="poster"
+                                    multiple
+                                    value={poster}
+                                    onChange={getHandler(setPoster)}
                                 />
                             </div>
                         </div>

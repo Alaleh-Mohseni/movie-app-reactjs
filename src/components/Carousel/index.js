@@ -1,6 +1,6 @@
-import TopGonImg from "../../assets/top-gun.jpg"
-import MarloweImg from "../../assets/Marlowe.jpg"
-import Midway from "../../assets/midway-movie.jpg"
+import TopGonImg from "../../assets/top-gun.jpg";
+import MarloweImg from "../../assets/Marlowe.jpg";
+import Midway from "../../assets/midway-movie.jpg";
 
 
 const Carousel = () => {

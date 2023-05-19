@@ -1,27 +1,26 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
-import axios from "axios";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { httpClient } from "../../services/Http";
+import { REGISTER } from "../../config/api-endpoints";
+
 
 const Register = () => {
-    
-    const [formInput, setFormInput] = useState({
-        username: "",
-        email: "",
-        password: "",
-    });
 
-    const [formError, setFormError] = useState({
-        username: "",
-        email: "",
-        password: "",
-    });
+    const [name, setName] = useState('')
+    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
+    const [nameError, setNameError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
 
-    const handleUserInput = (name, value) => {
-        setFormInput({
-            ...formInput,
-            [name]: value,
-        });
-    };
+
+    const getHandler = (setter) => {
+        return function handler(e) {
+            setter(e.target.value)
+        }
+    }
+
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -29,45 +28,40 @@ const Register = () => {
         const postRequest = async () => {
             try {
                 const payload = {
-                    email: formInput.email,
-                    password: formInput.password,
-                    name: formInput.username,
+                    name,
+                    email,
+                    password,
                 }
-                const response = await axios.post(`https://moviesapi.ir/api/v1/register`, payload)
+                const response = await httpClient.post(REGISTER, payload)
                 console.log('response', response.data);
             } catch (error) {
                 console.log(error);
-                console.log({ errResp: error.response })
             }
         }
 
-
-        let inputError = {
-            username: "",
-            email: "",
-            password: "",
+        if (!name) {
+            setNameError('Please enter your name')
+        } else {
+            setNameError('')
         }
 
-        if (!formInput.username && !formInput.email && !formInput.password) {
-            setFormError({
-                ...inputError,
-                username: "Please enter your name",
-                email: "Please enter your email address",
-                password: "Please enter a password",
-            });
-            return
+        if (!email) {
+            setEmailError('Please enter your email address')
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            setEmailError('Please enter a valid email address')
+        } else if (email) {
+            setEmailError('');
         }
 
-        if (formInput.password.length < 8) {
-            setFormError({
-                ...inputError,
-                password: "Password should contains atleast 8 charaters",
-            });
-            return
+        if (!password) {
+            setPasswordError('Please enter a password')
+        } else if (password.length < 8) {
+            setPasswordError('Password should contains atleast 8 charaters')
+        } else if (password) {
+            setPasswordError('')
         }
 
         postRequest()
-        setFormError(inputError)
     };
 
 
@@ -81,11 +75,11 @@ const Register = () => {
                     id="registerUsername"
                     placeholder="username"
                     name="username"
-                    value={formInput.username}
-                    onChange={({ target }) => handleUserInput(target.name, target.value)}
+                    value={name}
+                    onChange={getHandler(setName)}
                 />
                 <label htmlFor="registerUsername">Name</label>
-                <p className="text-danger">{formError.username}</p>
+                {nameError && <p className="text-danger" style={{ fontSize: '13px' }}>{nameError}</p>}
             </div>
             <div className="form-floating mb-3">
                 <input
@@ -94,29 +88,28 @@ const Register = () => {
                     className="form-control"
                     id="registerEmail"
                     placeholder="name@example.com"
-                    value={formInput.email}
-                    onChange={({ target }) => handleUserInput(target.name, target.value)}
+                    value={email}
+                    onChange={getHandler(setEmail)}
                 />
                 <label htmlFor="registerEmail">Email address</label>
-                <p className="text-danger">{formError.email}</p>
+                {emailError && <p className="text-danger" style={{ fontSize: '13px' }}>{emailError}</p>}
             </div>
             <div className="form-floating mb-3">
                 <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     name="password"
                     className="form-control"
                     id="registerPassword"
                     placeholder="Password"
-                    value={formInput.password}
-                    onChange={({ target }) => handleUserInput(target.name, target.value)}
+                    value={password}
+                    onChange={getHandler(setPassword)}
                 />
                 <label htmlFor="registerPassword">Password</label>
-                <p className="text-danger">{formError.password}</p>
-            </div>
-            <div className="checkbox mb-3">
-                <label htmlFor="terms">
-                    <input type="checkbox" value="terms" className="me-2" />I agree to the terms and conditions
-                </label>
+                {passwordError && <p className="text-danger" style={{ fontSize: '13px' }}>{passwordError}</p>}
+                <div className="checkbox">
+                    <input type="checkbox" name="show" id="show" className="checkbox me-2 mt-3" onClick={() => setShowPassword(!showPassword)} />
+                    <label htmlFor="show">Show password</label>
+                </div>
             </div>
             <button className="w-100 btn btn-lg btn-primary" type="submit" value="submit">Sign up</button>
             <hr className="my-4" />

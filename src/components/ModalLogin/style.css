@@ -1,4 +1,4 @@
-.modal-login {
+.modal__login {
     width: 30%;
     background-color: #ffffff;
     position: fixed;
@@ -11,7 +11,7 @@
 }
 
 @media (max-width: 60rem) {
-    .modal-login {
+    .modal__login {
         width: 85%;
     }
 }

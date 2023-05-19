@@ -12,21 +12,21 @@ const MovieItem = ({ poster, title, year, released, genres, runtime, country, pl
                 </div>
                 <div className="col p-4 d-flex flex-column position-static">
                     <div className="blog-post">
-                        <h2 className="blog-post-title pb-3 pt-4">{title} ({year})</h2>
+                        <h1 className="blog-post-title pb-3 pt-4">{title} ({year})</h1>
                         <span className="fs-5"><i className="fa fa-star text-warning pe-1"></i>({rating}/10)</span>
                         <p className="blog-post-meta pt-3">{released} ({country}) . {rated} . {genres} . {runtime}</p>
                     </div>
                     <div className='content'>
                         <div className="pt-3">
-                            <p className="fw-bold">Overview</p>
+                            <p className="fw-semibold fs-4">Overview</p>
                             <p>{plot}</p>
                         </div>
                         <div className="pt-2">
-                            <span className="fw-bold">Director: </span>
+                            <span className="fw-semibold fs-5">Director: </span>
                             <span>{director}</span>
                         </div>
                         <div className="pt-3">
-                            <span className="fw-bold">The Cast: </span>
+                            <span className="fw-semibold fs-5">The Cast: </span>
                             <span>{actors}</span>
                         </div>
                     </div>

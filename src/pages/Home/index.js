@@ -1,5 +1,5 @@
-import { useContext } from "react"
-import { stateContext } from "../../contexts"
+import { useContext } from "react";
+import { stateContext } from "../../contexts";
 
 import Carousel from "../../components/Carousel";
 import Popular from "../../components/Popular";

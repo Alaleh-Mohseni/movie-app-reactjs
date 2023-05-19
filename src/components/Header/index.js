@@ -1,10 +1,10 @@
-import { useContext } from "react"
-import { stateContext } from "../../contexts"
-import { Link } from "react-router-dom"
+import { useContext } from "react";
+import { stateContext } from "../../contexts";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 
-    const {setPage, debouncedOnChange, handleModalLogin, handleModalRegister, genres, logged, setLogged} = useContext(stateContext)
+    const { setPage, debouncedOnChange, handleModalLogin, handleModalRegister, genres, logged, setLogged } = useContext(stateContext)
 
     const sortGenre = genres.sort((a, b) => a.name.localeCompare(b.name))
 
@@ -23,7 +23,9 @@ const Header = () => {
         <header className="p-3 text-bg-dark">
             <div className="container-fluid">
                 <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-between">
-                    <h1 className="fs-3 fw-normal">TheMovie<span className="fw-bold">Box</span></h1>
+                    <Link to="/" className="text-white text-decoration-none">
+                        <h1 className="fs-3 fw-normal">TheMovie<span className="fw-bold">Box</span></h1>
+                    </Link>
                     <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 fw-semibold text-white">
                         <Link to="/" className="text-white text-decoration-none">
                             <li className="nav-item px-3">Home</li>
@@ -63,7 +65,9 @@ const Header = () => {
                                         <li className="dropdown-item">Add Movie</li>
                                     </Link>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li className="dropdown-item" onClick={() => setLogged(false)}>Log out</li>
+                                    <Link to="/" className="text-dark text-decoration-none">
+                                        <li className="dropdown-item" onClick={() => setLogged(false)}>Log out</li>
+                                    </Link>
                                 </ul>
                             </div>
 

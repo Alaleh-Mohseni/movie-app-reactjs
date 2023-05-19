@@ -1,5 +1,5 @@
-import Wrapper from "../../components/Wrapper"
-import Register from "../../components/Register"
+import Wrapper from "../../components/Wrapper";
+import Register from "../../components/Register";
 
 const RegisterPage = () => {
     return (

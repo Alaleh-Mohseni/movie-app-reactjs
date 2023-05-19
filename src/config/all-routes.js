@@ -1,5 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 
+import * as paths from "./route-paths";
 import Home from '../pages/Home';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
@@ -15,47 +16,47 @@ const AllRoutes = () => {
         <Routes>
             <Route
                 exact
-                path="/"
+                path= {paths.HOME}
                 element={<Home />}
             />
             <Route
                 exact
-                path="/login"
+                path= {paths.LOGIN}
                 element={<LoginPage />}
             />
             <Route
                 exact
-                path="/login/forgotpassword"
+                path= {paths.FORGOTPASSWORD}
                 element={<ForgotPassword />}
             />
             <Route
                 exact
-                path="/register"
+                path= {paths.REGISTER}
                 element={<RegisterPage />}
             />
             <Route
                 exact
-                path="/moviedetails/:id"
+                path= {paths.MOVIEDETAILS}
                 element={<MovieDetails />}
             />
             <Route
                 exact
-                path="/genre/:id"
+                path= {paths.GENRE}
                 element={<Genre />}
             />
             <Route
                 exact
-                path="/profile"
+                path= {paths.PROFILE}
                 element={<Profile />}
             />
             <Route
                 exact
-                path="/newmovie"
+                path= {paths.ADDMOVIE}
                 element={<AddMovie />}
             />
             <Route
                 exact
-                path="/404"
+                path= {paths.NOTFOUND}
                 element={<NotFound />}
             />
             <Route

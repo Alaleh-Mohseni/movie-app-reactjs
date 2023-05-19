@@ -1,12 +1,13 @@
 import { useState, useEffect, useCallback, useContext } from "react";
-import { stateContext } from "../../contexts"
+import { stateContext } from "../../contexts";
 import { useParams } from "react-router-dom";
-import { enhancedFetch } from "../../services/Http";
+import { httpClient } from "../../services/Http";
+import { GENRES } from "../../config/api-endpoints";
 
-import "./style.css"
+import "./style.css";
 
-import Loading from "../../components/Loading"
-import ErrorMessage from "../../components/ErrorMessage"
+import Loading from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
 import Pagination from "../../components/Pagination";
 import MoviesCard from "../../components/MovieCards";
 
@@ -25,10 +26,10 @@ const Genre = () => {
     const fetchGenre = useCallback(async () => {
         try {
             setLoading(true)
-            const response = await enhancedFetch(`https://moviesapi.ir/api/v1/genres/${id}/movies?page=${page}`)
-            console.log('response', response.metadata)
-            setGenre(response.data)
-            setPageCount(response.metadata.page_count)
+            const response = await httpClient.get(`${GENRES}/${id}/movies?page=${page}`)
+            console.log('response', response.data)
+            setGenre(response.data.data)
+            setPageCount(response.data.metadata.page_count)
         } catch (err) {
             setError(true)
         } finally {
@@ -40,6 +41,7 @@ const Genre = () => {
     useEffect(() => {
         fetchGenre()
     }, [fetchGenre])
+    
 
     const filteredGenre = genre.filter(item =>
         item.title.toLowerCase().includes(search.toLowerCase())

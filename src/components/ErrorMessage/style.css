@@ -18,12 +18,12 @@
   text-shadow: 0 0 1px lighten(#dc3545, 20);
 }
 
-.error-btn,
+.error__btn,
 .error {
   background-color: #dc3545;
 }
 
-.error-btn {
+.error__btn {
   width: 100%;
   margin-top: 30px;
   padding: 15px 10px;
@@ -40,7 +40,7 @@
   text-transform: uppercase;
 }
 
-.error-btn:hover {
+.error__btn:hover {
   background-color: #fbfbfb;
   color: #dc3545;
 }

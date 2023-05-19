@@ -1,25 +1,26 @@
-import { useContext } from "react"
-import { stateContext } from "../../contexts"
+import { useContext } from "react";
+import { stateContext } from "../../contexts";
 
-import "./style.css"
-import Backdrop from "../Backdrop"
-import Register from "../Register"
+import "./style.css";
+
+import Backdrop from "../Backdrop";
+import Register from "../Register";
 
 const ModalRegister = () => {
 
-    const {register, handleModalClose} = useContext(stateContext)
+    const { register, handleModalClose } = useContext(stateContext)
 
     return (
         <>
             <Backdrop show={register} onClick={handleModalClose} />
-            <div
-                className="modal-register rounded-4"
+            < div
+                className="modal__register rounded-4"
                 style={{
                     display: register ? 'block' : 'none',
                 }}
             >
                 <Register />
-            </div>
+            </div >
         </>
     )
 }

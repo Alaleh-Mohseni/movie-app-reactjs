@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"
-import "./style.css"
+import { Link } from "react-router-dom";
+import "./style.css";
 
 const MoviesCard = ({ id, title, poster, genres, year, rating }) => {
     return (

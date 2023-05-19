@@ -1,9 +1,9 @@
-import { useContext } from "react"
-import { stateContext } from "../../contexts"
+import { useContext } from "react";
+import { stateContext } from "../../contexts";
 
-import Loading from "../Loading"
-import ErrorMessage from "../ErrorMessage"
-import MovieCards from "../MovieCards"
+import Loading from "../Loading";
+import ErrorMessage from "../ErrorMessage";
+import MovieCards from "../MovieCards";
 
 const Popular = () => {
 
@@ -19,7 +19,6 @@ const Popular = () => {
             return <ErrorMessage />
         }
 
-        // const filterNewMovie = filteredMovies.sort((a, b) => b.year - a.year)
 
         if (!filteredMovies || filteredMovies.length === 0) {
             return <p className="text-center fs-5 fw-semibold m-auto">No results found for "{search}"</p>
@@ -44,7 +43,7 @@ const Popular = () => {
     return (
         <div className="album py-5 bg-body-tertiary">
             <div className="container">
-                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-5 g-3">
                     {renderMovies()}
                 </div>
             </div>

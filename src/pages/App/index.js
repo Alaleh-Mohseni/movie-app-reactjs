@@ -1,19 +1,19 @@
 import { BrowserRouter } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
-import { stateContext } from "../../contexts"
-import { enhancedFetch } from "../../services/Http";
+import { stateContext } from "../../contexts";
+import { httpClient } from "../../services/Http"
+import { MOVIES, GENRES } from "../../config/api-endpoints";
 import { debounce } from "lodash";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
 
-import Header from "../Header";
-import Footer from "../Footer"
-import ModalLogin from "../ModalLogin"
-import ModalRegister from "../ModalRegister";
-import AllRoutes from "../../config";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import ModalLogin from "../../components/ModalLogin";
+import ModalRegister from "../../components/ModalRegister";
+import AllRoutes from "../../config/all-routes";
 
-const BASE_API_URL = `https://moviesapi.ir`;
 
 const App = () => {
 
@@ -32,9 +32,9 @@ const App = () => {
   const fetchMovie = useCallback(async () => {
     try {
       setLoading(true)
-      const response = await enhancedFetch(BASE_API_URL + `/api/v1/movies?q=${search}&page=${page}`)
-      setMovies(response.data)
-
+      const response = await httpClient.get(`${MOVIES}?q=${search}&page=${page}`)
+      setMovies(response.data.data)
+      console.log('response', response.data.data)
     } catch (err) {
       setError(true)
     } finally {
@@ -47,8 +47,8 @@ const App = () => {
   const fetchGenre = useCallback(async () => {
     try {
       setLoading(true)
-      const response = await enhancedFetch(BASE_API_URL + `/api/v1/genres`)
-      setGenres(response)
+      const response = await httpClient.get(GENRES)
+      setGenres(response.data)
     } catch (err) {
       setError(true)
     } finally {

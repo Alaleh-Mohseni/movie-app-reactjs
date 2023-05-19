@@ -1,9 +1,10 @@
-import { useContext } from "react"
-import { stateContext } from "../../contexts"
+import { useContext } from "react";
+import { stateContext } from "../../contexts";
 
-import "./style.css"
-import Backdrop from "../Backdrop"
-import Login from "../Login"
+import "./style.css";
+
+import Backdrop from "../Backdrop";
+import Login from "../Login";
 
 const ModalLogin = () => {
 
@@ -13,7 +14,7 @@ const ModalLogin = () => {
         <>
             <Backdrop show={login} onClick={handleModalClose} />
             <div
-                className="modal-login rounded-4"
+                className="modal__login rounded-4"
                 style={{
                     display: login ? 'block' : 'none',
                 }}

@@ -2,7 +2,7 @@ import "./style.css"
 
 const Backdrop = ({ show, onClick }) => {
     return (
-        show ? <div className="back_drop" onClick={onClick}></div> : null
+        show ? <div className="back__drop" onClick={onClick}></div> : null
     )
 }
 

@@ -1,6 +1,6 @@
 import "./style.css";
 
-const ErrorMessage = ({ click }) => {
+const ErrorMessage = () => {
     
 	const clickHandler = () => {
         window.location.reload()
@@ -10,7 +10,7 @@ const ErrorMessage = ({ click }) => {
         <div className="error">
             <h3>Ooops!</h3>
             <p>Something went wrong, sorry about that.</p>
-            <button className="error-btn" onClick={clickHandler}>Let's try again</button>
+            <button className="error__btn" onClick={clickHandler}>Let's try again</button>
         </div>
     )
 }

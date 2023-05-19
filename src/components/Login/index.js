@@ -1,30 +1,26 @@
 import { useState, useContext } from "react";
-import { stateContext } from "../../contexts";
-
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { stateContext } from "../../contexts";
+import { httpClient } from "../../services/Http";
+import { LOGIN } from "../../config/api-endpoints";
+import { set } from "../../services/CreateStorage";
+
 
 const Login = () => {
 
-    const {setLogged, setLogin} = useContext(stateContext)
-
-    const [formInput, setFormInput] = useState({
-        email: "",
-        password: "",
-    });
-
-    const [formError, setFormError] = useState({
-        email: "",
-        password: "",
-    });
+    const { setLogged, setLogin } = useContext(stateContext)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
 
 
-    const handleUserInput = (name, value) => {
-        setFormInput({
-            ...formInput,
-            [name]: value,
-        });
-    };
+    const getHandler = (setter) => {
+        return function handler(e) {
+            setter(e.target.value)
+        }
+    }
+
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -33,8 +29,8 @@ const Login = () => {
             try {
                 const formData = new URLSearchParams();
                 formData.append("grant_type", "password");
-                formData.append("username", formInput.email);
-                formData.append("password", formInput.password);
+                formData.append("username", email);
+                formData.append("password", password);
 
                 const customConfig = {
                     headers: {
@@ -42,14 +38,14 @@ const Login = () => {
                     }
                 }
 
-                const response = await axios.post("https://moviesapi.ir/oauth/token", formData, customConfig)
+                const response = await httpClient.post(LOGIN, formData, customConfig)
                 console.log('response', response)
 
                 const accessToken = await response.data.access_token
-                localStorage.setItem('access-token', JSON.stringify(accessToken))
-
                 const refreshToken = await response.data.refresh_token
-                localStorage.setItem('refresh-token', JSON.stringify(refreshToken))
+                set('access_token', accessToken)
+                set('refresh_token', refreshToken)
+
 
                 setLogged(true)
                 setLogin(false)
@@ -59,23 +55,19 @@ const Login = () => {
             }
         }
 
-
-        let inputError = {
-            email: "",
-            password: "",
+        if (!email) {
+            setEmailError('Please enter your email address')
+        } else {
+            setEmailError('');
         }
 
-        if (!formInput.email && !formInput.password) {
-            setFormError({
-                ...inputError,
-                email: "Please enter your email address",
-                password: "Password should not be empty",
-            });
-            return
+        if (!password) {
+            setPasswordError('Please enter a password')
+        } else {
+            setPasswordError('')
         }
 
         getToken()
-        setFormError(inputError)
     };
 
 
@@ -89,11 +81,11 @@ const Login = () => {
                     className="form-control"
                     id="email"
                     placeholder="name@example.com"
-                    value={formInput.email}
-                    onChange={({ target }) => handleUserInput(target.name, target.value)}
+                    value={email}
+                    onChange={getHandler(setEmail)}
                 />
                 <label htmlFor="email">Email address</label>
-                <p className="text-danger">{formError.email}</p>
+                {emailError && <p className="text-danger" style={{ fontSize: '13px' }}>{emailError}</p>}
             </div>
             <div className="form-floating mb-3">
                 <input
@@ -102,11 +94,11 @@ const Login = () => {
                     className="form-control"
                     id="password"
                     placeholder="Password"
-                    value={formInput.password}
-                    onChange={({ target }) => handleUserInput(target.name, target.value)}
+                    value={password}
+                    onChange={getHandler(setPassword)}
                 />
                 <label htmlFor="password">Password</label>
-                <p className="text-danger">{formError.password}</p>
+                {passwordError && <p className="text-danger" style={{ fontSize: '13px' }}>{passwordError}</p>}
             </div>
             <div className="checkbox mb-3 d-flex justify-content-between">
                 <label>

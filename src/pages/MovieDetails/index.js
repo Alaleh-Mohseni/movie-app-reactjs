@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { enhancedFetch } from "../../services/Http";
+import { httpClient } from "../../services/Http";
+import { MOVIES } from "../../config/api-endpoints";
 
 import MovieItem from "../../components/MovieItem";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
-
-
-const BASE_API_URL = `https://moviesapi.ir`;
 
 
 const MovieDetails = () => {
@@ -22,8 +20,8 @@ const MovieDetails = () => {
         const fetchMovie = async () => {
             try {
                 setLoading(true)
-                const response = await enhancedFetch(BASE_API_URL + `/api/v1/movies/${id}`)
-                setMovie(response)
+                const response = await httpClient.get(`${MOVIES}/${id}`)
+                setMovie(response.data)
             } catch {
                 setError(true)
             } finally {
