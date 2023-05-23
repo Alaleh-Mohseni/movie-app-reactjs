@@ -7,3 +7,16 @@
 body {
   font-family: 'Nunito', sans-serif;
 }
+
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: lightgray;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #3d8bfd;
+  border-radius: 20px;
+}

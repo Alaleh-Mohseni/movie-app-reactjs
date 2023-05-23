@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { stateContext } from "../../contexts";
+import { stateContext } from "../../contexts/contexts";
 import { httpClient } from "../../services/Http";
 import { LOGIN } from "../../config/api-endpoints";
 import { set } from "../../services/CreateStorage";
@@ -9,10 +9,13 @@ import { set } from "../../services/CreateStorage";
 const Login = () => {
 
     const { setLogged, setLogin } = useContext(stateContext)
+    
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
+    const [invalid, setInvalid] = useState(false)
 
 
     const getHandler = (setter) => {
@@ -22,38 +25,38 @@ const Login = () => {
     }
 
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        const getToken = async () => {
-            try {
-                const formData = new URLSearchParams();
-                formData.append("grant_type", "password");
-                formData.append("username", email);
-                formData.append("password", password);
+        try {
+            const formData = new URLSearchParams();
+            formData.append("grant_type", "password");
+            formData.append("username", email);
+            formData.append("password", password);
 
-                const customConfig = {
-                    headers: {
-                        "content-type": "application/x-www-form-urlencoded"
-                    }
+            const customConfig = {
+                headers: {
+                    "content-type": "application/x-www-form-urlencoded"
                 }
-
-                const response = await httpClient.post(LOGIN, formData, customConfig)
-                console.log('response', response)
-
-                const accessToken = await response.data.access_token
-                const refreshToken = await response.data.refresh_token
-                set('access_token', accessToken)
-                set('refresh_token', refreshToken)
-
-
-                setLogged(true)
-                setLogin(false)
-
-            } catch (error) {
-                console.log(error);
             }
+
+            const response = await httpClient.post(LOGIN, formData, customConfig)
+            console.log('response', response)
+
+            const accessToken = await response.data.access_token
+            const refreshToken = await response.data.refresh_token
+            set('access_token', accessToken)
+            set('refresh_token', refreshToken)
+
+
+            setLogged(true)
+            setLogin(false)
+
+        } catch (error) {
+            console.log(error.response.data.message);
+            setErrorMessage(error.response.data.message)
         }
+
 
         if (!email) {
             setEmailError('Please enter your email address')
@@ -67,12 +70,22 @@ const Login = () => {
             setPasswordError('')
         }
 
-        getToken()
+        if (email.length !== 0 && password.length !== 0) {
+            setInvalid(true)
+            setTimeout(() => {
+                setInvalid(false)
+            }, 3000);
+        }
     };
 
 
     return (
         <form className="p-md-5" onSubmit={handleFormSubmit}>
+            {invalid && (
+                <div className="alert alert-danger text-center">
+                    <p style={{ fontSize: '15px' }}>{errorMessage}</p>
+                </div>
+            )}
             <h3 className="display-4 fw-bold lh-1 text-body-emphasis mb-5 text-center fs-1">Login</h3>
             <div className="form-floating mb-3">
                 <input
@@ -104,9 +117,6 @@ const Login = () => {
                 <label>
                     <input type="checkbox" value="remember-me" /> Remember me
                 </label>
-                <span className="text-body-secondary">
-                    <Link className="text-decoration-none text-primary" to="/login/forgotpassword">Forgot Password?</Link>
-                </span>
             </div>
             <button className="w-100 btn btn-lg btn-primary" type="submit">Login</button>
             <hr className="mb-3 mt-4" />

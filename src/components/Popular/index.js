@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { stateContext } from "../../contexts";
+import { stateContext } from "../../contexts/contexts";
 
 import Loading from "../Loading";
 import ErrorMessage from "../ErrorMessage";

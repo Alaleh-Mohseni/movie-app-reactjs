@@ -12,7 +12,11 @@ const Register = () => {
     const [nameError, setNameError] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const [emailError, setEmailError] = useState('')
+    const [error, setError] = useState('')
+    const [allValid, setAllValid] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
+    const [submitted, setSubmitted] = useState(false);
+    const [registerError, setRegisterError] = useState(false);
 
 
     const getHandler = (setter) => {
@@ -22,21 +26,23 @@ const Register = () => {
     }
 
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        const postRequest = async () => {
-            try {
-                const payload = {
-                    name,
-                    email,
-                    password,
-                }
-                const response = await httpClient.post(REGISTER, payload)
-                console.log('response', response.data);
-            } catch (error) {
-                console.log(error);
+        try {
+            const payload = {
+                name,
+                email,
+                password,
             }
+            const response = await httpClient.post(REGISTER, payload)
+            console.log('response', response.data);
+            setSubmitted(true)
+            setRegisterError(false)
+        } catch (error) {
+            setSubmitted(false)
+            setRegisterError(true)
+            setError(error.response.data.errors)
         }
 
         if (!name) {
@@ -61,12 +67,29 @@ const Register = () => {
             setPasswordError('')
         }
 
-        postRequest()
+        if (name.length !== 0 && email.length !== 0 && password.length !== 0) {
+            setAllValid(true)
+            setTimeout(() => {
+                setAllValid(false)
+            }, 3000);
+        } else {
+            setRegisterError(true)
+            setTimeout(() => {
+                setRegisterError(false)
+            }, 3000);
+        }
+
     };
 
 
     return (
         <form className="p-4 p-md-5" onSubmit={handleFormSubmit}>
+            {submitted && allValid && (
+                <div className="alert alert-success text-center">Success! Thank you for registering</div>
+            )}
+            {registerError && (
+                <div className="alert alert-danger text-center" style={{ fontSize: '14px' }}>{error}</div>
+            )}
             <h3 className="display-4 fw-bold fs-2 lh-1 text-body-emphasis mb-5 text-center">Create an account</h3>
             <div className="form-floating mb-3">
                 <input

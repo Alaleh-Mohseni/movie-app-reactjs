@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useContext } from "react";
-import { stateContext } from "../../contexts";
+import { stateContext } from "../../contexts/contexts";
 import { useParams } from "react-router-dom";
 import { httpClient } from "../../services/Http";
 import { GENRES } from "../../config/api-endpoints";

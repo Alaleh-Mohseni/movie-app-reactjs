@@ -1,10 +1,12 @@
 import { useContext } from "react";
-import { stateContext } from "../../contexts";
+import { stateContext } from "../../contexts/contexts";
 import { Link } from "react-router-dom";
+
+import SearchForm from "../SearchForm";
 
 const Header = () => {
 
-    const { setPage, debouncedOnChange, handleModalLogin, handleModalRegister, genres, logged, setLogged } = useContext(stateContext)
+    const { handleModalLogin, handleModalRegister, genres, logged, setLogged } = useContext(stateContext)
 
     const sortGenre = genres.sort((a, b) => a.name.localeCompare(b.name))
 
@@ -41,18 +43,8 @@ const Header = () => {
                         </li>
                     </ul>
 
-                    <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                        <input
-                            type="search"
-                            className="form-control"
-                            placeholder="Search..."
-                            aria-label="Search"
-                            onChange={(e) => {
-                                setPage(1)
-                                debouncedOnChange(e)
-                            }}
-                        />
-                    </form>
+                    <SearchForm />
+
                     {
                         logged ? (
                             <div className="d-flex row dropdown text-white">

@@ -4,7 +4,6 @@ import * as paths from "./route-paths";
 import Home from '../pages/Home';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
-import ForgotPassword from '../components/ForgotPassword';
 import MovieDetails from '../pages/MovieDetails';
 import Genre from '../pages/Genre';
 import AddMovie from "../pages/AddMovie";
@@ -23,11 +22,6 @@ const AllRoutes = () => {
                 exact
                 path= {paths.LOGIN}
                 element={<LoginPage />}
-            />
-            <Route
-                exact
-                path= {paths.FORGOTPASSWORD}
-                element={<ForgotPassword />}
             />
             <Route
                 exact
