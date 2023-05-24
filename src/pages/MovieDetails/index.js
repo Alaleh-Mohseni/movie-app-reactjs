@@ -66,7 +66,7 @@ const MovieDetails = () => {
 
 
     return (
-        <div className="">
+        <div style={{minHeight: '100vh'}}>
             <div className="container">
                 <div className="row">
                     {renderDetails()}

@@ -1,10 +1,14 @@
+import "./style.css"
+
 const Loading = () => {
     return (
-        <div className="m-auto">
-            <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </div>
-        </div>
+        <section className="dots__container">
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+        </section>
     )
 }
 

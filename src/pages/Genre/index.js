@@ -83,7 +83,7 @@ const Genre = () => {
         <div className="container">
             <div className="album py-5 bg-body-tertiary genre__page">
                 <div className="container">
-                    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+                    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-5 g-3">
                         {renderGenre()}
                     </div>
                 </div>

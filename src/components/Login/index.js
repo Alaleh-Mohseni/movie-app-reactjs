@@ -9,7 +9,7 @@ import { set } from "../../services/CreateStorage";
 const Login = () => {
 
     const { setLogged, setLogin } = useContext(stateContext)
-    
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [emailError, setEmailError] = useState('')
@@ -82,9 +82,7 @@ const Login = () => {
     return (
         <form className="p-md-5" onSubmit={handleFormSubmit}>
             {invalid && (
-                <div className="alert alert-danger text-center">
-                    <p style={{ fontSize: '15px' }}>{errorMessage}</p>
-                </div>
+                <div className="alert alert-danger text-center" style={{ fontSize: '15px' }}>{errorMessage}</div>
             )}
             <h3 className="display-4 fw-bold lh-1 text-body-emphasis mb-5 text-center fs-1">Login</h3>
             <div className="form-floating mb-3">
