@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { stateContext } from "../../contexts/contexts";
 import { httpClient } from "../../services/Http";
 import { LOGIN } from "../../config/api-endpoints";
@@ -8,7 +8,7 @@ import { set } from "../../services/CreateStorage";
 
 const Login = () => {
 
-    const { setLogged, setLogin } = useContext(stateContext)
+    const { setLogged, setLogin, logged } = useContext(stateContext)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -16,6 +16,7 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const [invalid, setInvalid] = useState(false)
+    const navigate = useNavigate()
 
 
     const getHandler = (setter) => {
@@ -41,16 +42,17 @@ const Login = () => {
             }
 
             const response = await httpClient.post(LOGIN, formData, customConfig)
-            console.log('response', response)
+            console.log('response', response.status)
+
+            if (response.status === 200) {
+                setLogged(true)
+                setLogin(false)    
+            }
 
             const accessToken = await response.data.access_token
             const refreshToken = await response.data.refresh_token
             set('access_token', accessToken)
             set('refresh_token', refreshToken)
-
-
-            setLogged(true)
-            setLogin(false)
 
         } catch (error) {
             console.log(error.response.data.message);
@@ -76,14 +78,17 @@ const Login = () => {
                 setInvalid(false)
             }, 3000);
         }
+
+        if (logged) {
+            return navigate('/')
+        }        
+
     };
 
 
     return (
         <form className="p-md-5" onSubmit={handleFormSubmit}>
-            {invalid && (
-                <div className="alert alert-danger text-center" style={{ fontSize: '15px' }}>{errorMessage}</div>
-            )}
+            {invalid && <p className="alert alert-danger text-center" style={{ fontSize: '15px'}}>{errorMessage}</p>}
             <h3 className="display-4 fw-bold lh-1 text-body-emphasis mb-5 text-center fs-1">Login</h3>
             <div className="form-floating mb-3">
                 <input
