@@ -7,9 +7,8 @@ import { set } from "../../services/CreateStorage";
 
 
 const Login = () => {
-
+    
     const { setLogged, setLogin, logged } = useContext(stateContext)
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [emailError, setEmailError] = useState('')
