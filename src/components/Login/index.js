@@ -42,11 +42,13 @@ const Login = () => {
             }
 
             const response = await httpClient.post(LOGIN, formData, customConfig)
-            console.log('response', response.status)
 
             if (response.status === 200) {
                 setLogged(true)
-                setLogin(false)    
+                setLogin(false)
+                setInvalid(false)
+            } else {
+                setInvalid(true)
             }
 
             const accessToken = await response.data.access_token
@@ -55,7 +57,7 @@ const Login = () => {
             set('refresh_token', refreshToken)
 
         } catch (error) {
-            console.log(error.response.data.message);
+            setInvalid(true)
             setErrorMessage(error.response.data.message)
         }
 

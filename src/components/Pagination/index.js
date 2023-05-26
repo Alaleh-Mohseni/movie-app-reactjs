@@ -16,7 +16,7 @@ const Pagination = ({ setPage, pageCount }) => {
                 breakLabel={"..."}
                 pageCount={pageCount}
                 marginPagesDisplayed={2}
-                pageRangeDisplayed={3}
+                pageRangeDisplayed={2}
                 onPageChange={handleClick}
                 containerClassName={"pagination justify-content-center"}
                 pageClassName={"page-item"}
