@@ -1,13 +1,8 @@
-import { useContext } from "react";
-import { stateContext } from "../../contexts/contexts";
-
 import Loading from "../Loading";
 import ErrorMessage from "../ErrorMessage";
 import MovieCards from "../MovieCards";
 
-const Popular = () => {
-
-    const {loading, error, search, filteredMovies} = useContext(stateContext)
+const Popular = ({loading, error, filteredMovies, search}) => {
 
     const renderMovies = () => {
 

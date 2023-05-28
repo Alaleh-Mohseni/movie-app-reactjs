@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useContext } from "react";
-import { stateContext } from "../../contexts/contexts";
+import { searchContext } from "../../contexts/search-provider";
 import { useParams } from "react-router-dom";
 import { httpClient } from "../../services/Http";
 import { GENRES } from "../../config/api-endpoints";
@@ -13,7 +13,7 @@ import MoviesCard from "../../components/MovieCards";
 
 const Genre = () => {
 
-    const {search} = useContext(stateContext)
+    const {search} = useContext(searchContext)
 
     const [genre, setGenre] = useState([])
     const [page, setPage] = useState(1)

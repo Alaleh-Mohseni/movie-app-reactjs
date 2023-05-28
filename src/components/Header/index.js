@@ -1,12 +1,14 @@
 import { useContext } from "react";
-import { stateContext } from "../../contexts/contexts";
+import { genresContext } from "../../contexts/genres-provider";
+import { authContext } from "../../contexts/auth-provider";
 import { Link } from "react-router-dom";
 
 import SearchForm from "../SearchForm";
 
 const Header = () => {
 
-    const { handleModalLogin, handleModalRegister, genres, logged, setLogged } = useContext(stateContext)
+    const { genres } = useContext(genresContext)
+    const { handleModalLogin, handleModalRegister, logged, setLogged } = useContext(authContext)
 
     const sortGenre = genres.sort((a, b) => a.name.localeCompare(b.name))
 

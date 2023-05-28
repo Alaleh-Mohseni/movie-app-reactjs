@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { stateContext } from "../../contexts/contexts";
+import { authContext } from "../../contexts/auth-provider";
 import { httpClient } from "../../services/Http";
 import { LOGIN } from "../../config/api-endpoints";
 import { set } from "../../services/CreateStorage";
@@ -8,7 +8,7 @@ import { set } from "../../services/CreateStorage";
 
 const Login = () => {
     
-    const { setLogged, setLogin, logged } = useContext(stateContext)
+    const { setLogged, setLogin, logged } = useContext(authContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [emailError, setEmailError] = useState('')

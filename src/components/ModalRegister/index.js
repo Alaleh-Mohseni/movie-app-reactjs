@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { stateContext } from "../../contexts/contexts";
+import { authContext } from "../../contexts/auth-provider";
 
 import "./style.css";
 
@@ -8,7 +8,7 @@ import Register from "../Register";
 
 const ModalRegister = () => {
 
-    const { register, handleModalClose } = useContext(stateContext)
+    const { register, handleModalClose } = useContext(authContext)
 
     return (
         <>

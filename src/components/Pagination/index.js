@@ -18,7 +18,7 @@ const Pagination = ({ setPage, pageCount }) => {
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={2}
                 onPageChange={handleClick}
-                containerClassName={"pagination justify-content-center"}
+                containerClassName={"pagination justify-content-center flex-wrap"}
                 pageClassName={"page-item"}
                 pageLinkClassName={"page-link"}
                 previousClassName={"page-item"}

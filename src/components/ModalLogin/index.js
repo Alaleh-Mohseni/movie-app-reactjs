@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { stateContext } from "../../contexts/contexts";
+import { authContext } from "../../contexts/auth-provider";
 
 import "./style.css";
 
@@ -8,7 +8,7 @@ import Login from "../Login";
 
 const ModalLogin = () => {
 
-    const {login, handleModalClose} = useContext(stateContext)
+    const {login, handleModalClose} = useContext(authContext)
 
     return (
         <>

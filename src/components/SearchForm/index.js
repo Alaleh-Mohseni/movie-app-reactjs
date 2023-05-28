@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { stateContext } from "../../contexts/contexts";
+import { searchContext } from "../../contexts/search-provider";
 
 const SearchForm = () => {
-    const { setPage, debouncedOnChange } = useContext(stateContext)
+    const { setPage, debouncedOnChange } = useContext(searchContext)
 
     return (
         <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
