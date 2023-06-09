@@ -1,0 +1,19 @@
+.genres__box {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.genres__box::-webkit-scrollbar {
+    width: 10px;
+}
+
+.genres__box::-webkit-scrollbar-track {
+    background: lightgray;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.genres__box::-webkit-scrollbar-thumb {
+    background-color: #3d8bfd;
+    border-radius: 20px;
+}

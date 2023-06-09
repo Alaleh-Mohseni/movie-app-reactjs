@@ -1,0 +1,16 @@
+.profile {
+    position: relative;
+}
+
+.camera__icon {
+	background-color: #0d6efd;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+}

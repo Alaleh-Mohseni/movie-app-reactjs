@@ -4,6 +4,7 @@ import { authContext } from "../../contexts/auth-provider";
 import { Link } from "react-router-dom";
 
 import SearchForm from "../SearchForm";
+import './style.css';
 
 const Header = () => {
 
@@ -39,7 +40,7 @@ const Header = () => {
                         </Link>
                         <li className="nav-item px-3 dropdown">
                             <span className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Genres</span>
-                            <ul className="dropdown-menu">
+                            <ul className="dropdown-menu genres__box">
                                 {renderGenres()}
                             </ul>
                         </li>
@@ -53,14 +54,23 @@ const Header = () => {
                                 <span className="dropdown-toggle fw-semibold" data-bs-toggle="dropdown" aria-expanded="false">My Account</span>
                                 <ul className="dropdown-menu text-small text-white">
                                     <Link to="/profile" className="text-dark text-decoration-none">
-                                        <li className="dropdown-item">Profile</li>
+                                        <li className="dropdown-item">
+                                            <span><i className="fa fa-user"></i></span>
+                                            <span className="ps-2 fw-semibold">Profile</span>
+                                        </li>
                                     </Link>
                                     <Link to="/newmovie" className="text-dark text-decoration-none">
-                                        <li className="dropdown-item">Add Movie</li>
+                                        <li className="dropdown-item">
+                                            <span><i className="fa fa-file-video"></i></span>
+                                            <span className="ps-2 fw-semibold">Add Movie</span>
+                                        </li>
                                     </Link>
                                     <li><hr className="dropdown-divider" /></li>
                                     <Link to="/" className="text-dark text-decoration-none">
-                                        <li className="dropdown-item" onClick={() => setLogged(false)}>Log out</li>
+                                        <li className="dropdown-item" onClick={() => setLogged(false)}>
+                                            <span><i className="fa fa-sign-out-alt"></i></span>
+                                            <span className="ps-2 fw-semibold">Log Out</span>
+                                        </li>
                                     </Link>
                                 </ul>
                             </div>

@@ -90,7 +90,7 @@ const Login = () => {
     return (
         <form className="p-md-5" onSubmit={handleFormSubmit}>
             {invalid && <p className="alert alert-danger text-center" style={{ fontSize: '15px'}}>{errorMessage}</p>}
-            <h3 className="display-4 fw-bold lh-1 text-body-emphasis mb-5 text-center fs-1">Login</h3>
+            <h3 className="display-4 fw-bold lh-1 text-body-emphasis mb-5 text-center fs-2">Login</h3>
             <div className="form-floating mb-3">
                 <input
                     type="email"
