@@ -17,3 +17,8 @@
 - Bootstrap
 - Lodash
 - Axios
+
+
+## Preview
+
+![The-Movie-Box](https://github.com/Alaleh-Mohseni/movie-app-reactjs/assets/112727163/ff2e24a7-c97e-48bd-88a8-68e16e57e329)
