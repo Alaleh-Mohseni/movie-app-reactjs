@@ -9,6 +9,7 @@ import GenresProvider from "../../contexts/genres-provider";
 import SearchProvider from "../../contexts/search-provider";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import Loading from "../../components/Loading";
 import ModalLogin from "../../components/ModalLogin";
 import ModalRegister from "../../components/ModalRegister";
 import AllRoutes from "../../config/all-routes";
