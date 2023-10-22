@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,8 +15,15 @@ import AllRoutes from "../../config/all-routes";
 
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
 
-  return (
+    useEffect(() => {
+          setTimeout(() => setLoading(false), 1000);
+    }, []);
+  
+  return loading ? (
+    <Loading/>
+  ) : (
     <BrowserRouter>
       <AuthProvider>
         <ModalLogin />
