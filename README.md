@@ -20,8 +20,8 @@
 
 
 ## Preview
-
-![The-Movie-Box](https://github.com/Alaleh-Mohseni/movie-app-reactjs/assets/112727163/ff2e24a7-c97e-48bd-88a8-68e16e57e329)
+| home |
+| ------------------------------------------------------------------------------------------ | ![The-Movie-Box](https://github.com/Alaleh-Mohseni/movie-app-reactjs/assets/112727163/ff2e24a7-c97e-48bd-88a8-68e16e57e329) |
 
 
 ![The-Movie-Box-login](https://github.com/Alaleh-Mohseni/movie-app-reactjs/assets/112727163/c31975fb-2c9c-4507-9d1d-c47754e4d492)
