@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { httpClient } from "../../services/Http";
-import { REGISTER } from "../../config/api-endpoints";
+import { httpClient } from "../../../services/Http";
+import { REGISTER } from "../../../config/api-endpoints";
+import { authContext } from "../../../contexts/auth-provider";
 
+import "./style.css";
 
 const Register = () => {
 
+    const { setRegister, register } = useContext(authContext)
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
@@ -88,7 +91,7 @@ const Register = () => {
                 <div className="alert alert-success text-center">Success! Thank you for registering</div>
             )}
             {registerError && (
-                <div className="alert alert-danger text-center" style={{ fontSize: '14px' }}>{error}</div>
+                <div className="alert alert-danger text-center messages">{error}</div>
             )}
             <h3 className="display-4 fw-bold fs-2 lh-1 text-body-emphasis mb-5 text-center">Create an account</h3>
             <div className="form-floating mb-3">
@@ -102,7 +105,7 @@ const Register = () => {
                     onChange={getHandler(setName)}
                 />
                 <label htmlFor="registerUsername">Name</label>
-                {nameError && <p className="text-danger" style={{ fontSize: '13px' }}>{nameError}</p>}
+                {nameError && <p className="text-danger messages">{nameError}</p>}
             </div>
             <div className="form-floating mb-3">
                 <input
@@ -115,7 +118,7 @@ const Register = () => {
                     onChange={getHandler(setEmail)}
                 />
                 <label htmlFor="registerEmail">Email address</label>
-                {emailError && <p className="text-danger" style={{ fontSize: '13px' }}>{emailError}</p>}
+                {emailError && <p className="text-danger messages">{emailError}</p>}
             </div>
             <div className="form-floating mb-3">
                 <input
@@ -128,9 +131,15 @@ const Register = () => {
                     onChange={getHandler(setPassword)}
                 />
                 <label htmlFor="registerPassword">Password</label>
-                {passwordError && <p className="text-danger" style={{ fontSize: '13px' }}>{passwordError}</p>}
+                {passwordError && <p className="text-danger messages">{passwordError}</p>}
                 <div className="checkbox">
-                    <input type="checkbox" name="show" id="show" className="checkbox me-2 mt-3" onClick={() => setShowPassword(!showPassword)} />
+                    <input
+                        type="checkbox"
+                        name="show"
+                        id="show"
+                        className="checkbox me-2 mt-3"
+                        onClick={() => setShowPassword(!showPassword)}
+                    />
                     <label htmlFor="show">Show password</label>
                 </div>
             </div>
@@ -139,7 +148,13 @@ const Register = () => {
             <div className="d-flex justify-content-start align-items-center mt-4">
                 <span className="fw-normal">
                     Already have an account?
-                    <Link className="text-decoration-none text-primary" to="/login"> Login here</Link>
+                    <Link
+                        className="text-decoration-none text-primary"
+                        to="/login"
+                        onClick={() => setRegister(!register)}
+                    >
+                        Login here
+                    </Link>
                 </span>
             </div>
         </form>

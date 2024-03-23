@@ -25,6 +25,7 @@ const AuthProvider = ({ children }) => {
             value={{
                 login,
                 setLogin,
+                setRegister,
                 register,
                 logged,
                 setLogged,

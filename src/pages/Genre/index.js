@@ -1,75 +1,33 @@
-import { useState, useEffect, useCallback, useContext } from "react";
-import { searchContext } from "../../contexts/search-provider";
-import { useParams } from "react-router-dom";
-import { httpClient } from "../../services/Http";
-import { GENRES } from "../../config/api-endpoints";
-
-import "./style.css";
+import { useGenres } from "../../hooks/useGenres";
 
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import Pagination from "../../components/Pagination";
-import MoviesCard from "../../components/MovieCards";
+import MovieCards from "../../components/MovieCards";
+
+import "./style.css";
 
 const Genre = () => {
-
-    const {search} = useContext(searchContext)
-
-    const [genre, setGenre] = useState([])
-    const [page, setPage] = useState(1)
-    const [pageCount, setPageCount] = useState()
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false)
-    const { id } = useParams()
-
-
-    const fetchGenre = useCallback(async () => {
-        try {
-            setLoading(true)
-            const response = await httpClient.get(`${GENRES}/${id}/movies?page=${page}`)
-            console.log('response', response.data)
-            setGenre(response.data.data)
-            setPageCount(response.data.metadata.page_count)
-        } catch (err) {
-            setError(true)
-        } finally {
-            setLoading(false)
-        }
-    }, [id, page])
-
-
-    useEffect(() => {
-        fetchGenre()
-    }, [fetchGenre])
-    
-
-    const filteredGenre = genre.filter(item =>
-        item.title.toLowerCase().includes(search.toLowerCase())
-    )
-
+    const {data, isLoading, error, setPage, pageCount, refetch} = useGenres()
 
     const renderGenre = () => {
 
-        if (loading) {
+        if (isLoading) {
             return <Loading />
         }
 
         if (error) {
-            return <ErrorMessage />
+            return <ErrorMessage refetch={refetch} />
         }
 
-        if (!filteredGenre || filteredGenre.length === 0) {
-            return <p className="text-center fs-5 fw-semibold m-auto">No results found for "{search}"</p>
-        }
-
-        return filteredGenre.map(movie => {
+        return data?.map(movie => {
             return (
-                <MoviesCard
+                <MovieCards
                     key={movie.id}
                     title={movie.title}
                     poster={movie.poster}
                     id={movie.id}
-                    genres={movie.genres.join(', ')}
+                    genres={movie?.genres?.join(', ')}
                     year={movie.year}
                     rating={movie.imdb_rating}
                 />

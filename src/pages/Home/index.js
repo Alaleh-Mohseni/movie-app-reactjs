@@ -1,53 +1,52 @@
-import { useState, useEffect, useCallback, useContext } from "react";
-import { searchContext } from "../../contexts/search-provider";
-import { httpClient } from "../../services/Http"
-import { MOVIES } from "../../config/api-endpoints";
+import { useMovies } from "../../hooks/useMovies";
 
 import Carousel from "../../components/Carousel";
-import Popular from "../../components/Popular";
 import Pagination from "../../components/Pagination";
+import Loading from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
+import MovieCards from "../../components/MovieCards";
 
 
 const Home = () => {
-    const { search } = useContext(searchContext)
-    const [movies, setMovies] = useState([])
-    const [page, setPage] = useState(1)
-    const [pageCount, setPageCount] = useState(25)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false)
+    const { data, isLoading, error, setPage, pageCount, refetch } = useMovies()
 
+    const renderMovies = () => {
 
-    const fetchMovie = useCallback(async () => {
-        try {
-            setLoading(true)
-            const response = await httpClient.get(`${MOVIES}?q=${search}&page=${page}`)
-            setMovies(response.data.data)
-            setPageCount(25)
-        } catch (err) {
-            setError(true)
-        } finally {
-            setLoading(false)
+        if (isLoading) {
+            return <Loading />
         }
 
-    }, [search, page])
+        if (error) {
+            return <ErrorMessage refetch={refetch} />
+        }
 
-    useEffect(() => {
-        fetchMovie()
-    }, [fetchMovie])
 
-    const filteredMovies = movies.filter(item =>
-        item.title.toLowerCase().includes(search.toLowerCase())
-    )
+        return data?.map(movie => {
+            return (
+                <MovieCards
+                    key={movie.id}
+                    title={movie.title}
+                    poster={movie.poster}
+                    id={movie.id}
+                    genres={movie?.genres?.join(', ')}
+                    year={movie.year}
+                    rating={movie.imdb_rating}
+                />
+            );
+        })
+    }
+
 
     return (
         <main>
             <Carousel />
-            <Popular
-                filteredMovies={filteredMovies}
-                search={search}
-                loading={loading}
-                error={error}
-            />
+            <div className="album py-5 bg-body-tertiary">
+                <div className="container">
+                    <div className="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-xl-5 g-3">
+                        {renderMovies()}
+                    </div>
+                </div>
+            </div>
             <Pagination
                 setPage={setPage}
                 pageCount={pageCount}

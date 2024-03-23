@@ -1,14 +1,15 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { authContext } from "../../contexts/auth-provider";
-import { httpClient } from "../../services/Http";
-import { LOGIN } from "../../config/api-endpoints";
-import { set } from "../../services/CreateStorage";
+import { authContext } from "../../../contexts/auth-provider";
+import { httpClient } from "../../../services/Http";
+import { LOGIN } from "../../../config/api-endpoints";
+import { set } from "../../../services/CreateStorage";
 
+import "./style.css";
 
 const Login = () => {
-    
-    const { setLogged, setLogin, logged } = useContext(authContext)
+
+    const { setLogged, setLogin, logged, login } = useContext(authContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [emailError, setEmailError] = useState('')
@@ -82,14 +83,14 @@ const Login = () => {
 
         if (logged) {
             return navigate('/')
-        }        
+        }
 
     };
 
 
     return (
         <form className="p-md-5" onSubmit={handleFormSubmit}>
-            {invalid && <p className="alert alert-danger text-center" style={{ fontSize: '15px'}}>{errorMessage}</p>}
+            {invalid && <p className="alert alert-danger text-center alert-message">{errorMessage}</p>}
             <h3 className="display-4 fw-bold lh-1 text-body-emphasis mb-5 text-center fs-2">Login</h3>
             <div className="form-floating mb-3">
                 <input
@@ -102,7 +103,7 @@ const Login = () => {
                     onChange={getHandler(setEmail)}
                 />
                 <label htmlFor="email">Email address</label>
-                {emailError && <p className="text-danger" style={{ fontSize: '13px' }}>{emailError}</p>}
+                {emailError && <p className="text-danger messages">{emailError}</p>}
             </div>
             <div className="form-floating mb-3">
                 <input
@@ -115,7 +116,7 @@ const Login = () => {
                     onChange={getHandler(setPassword)}
                 />
                 <label htmlFor="password">Password</label>
-                {passwordError && <p className="text-danger" style={{ fontSize: '13px' }}>{passwordError}</p>}
+                {passwordError && <p className="text-danger messages">{passwordError}</p>}
             </div>
             <div className="checkbox mb-3 d-flex justify-content-between">
                 <label>
@@ -126,7 +127,13 @@ const Login = () => {
             <hr className="mb-3 mt-4" />
             <p className="text-body-secondary">
                 Don't have an account?
-                <Link className="text-decoration-none text-primary" to="/register"> Register</Link>
+                <Link
+                    className="text-decoration-none text-primary"
+                    to="/register"
+                    onClick={() => setLogin(!login)}
+                >
+                    Register
+                </Link>
             </p>
         </form>
     )

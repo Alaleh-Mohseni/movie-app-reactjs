@@ -2,8 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { httpClient } from "../../services/Http";
 import { PROFILE } from "../../config/api-endpoints";
 import { get } from "../../services/CreateStorage"
+import { FaCamera } from "react-icons/fa6";
 
 import ProfileImg from "../../assets/profile.png";
+
 import './style.css';
 
 const Profile = () => {
@@ -67,7 +69,7 @@ const Profile = () => {
                                 src={userProfile ? userProfile : ProfileImg}
                             />
                             <span className="camera__icon">
-                                <i className="fa fa-camera pt-1"></i>
+                                <FaCamera className="" size='18' />
                             </span>
                             <input
                                 hidden

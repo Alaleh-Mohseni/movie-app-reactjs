@@ -1,0 +1,24 @@
+.search-result {
+  max-height: 400px;
+
+  position: absolute;
+  z-index: 50;
+  overflow-x: hidden;
+}
+
+.search-result::-webkit-scrollbar {
+  width: 12px;
+}
+
+.search-result::-webkit-scrollbar-track {
+  background: lightgray;
+}
+
+.search-result::-webkit-scrollbar-thumb {
+  background-color: #3d8bfd;
+  border-radius: 20px;
+}
+
+.detail {
+  max-height: 100px;
+}
