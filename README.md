@@ -34,3 +34,31 @@
 
 
 ![The-Movie-Box-add](https://github.com/Alaleh-Mohseni/movie-app-reactjs/assets/112727163/699fcd89-0bdb-4d83-9f5e-8263fe489e24)
+
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%">Home Page</th>
+      <th width="50%">Search Form</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%"><img src="/src/assets/screenshots/The-Movie-Box.png"/></td>
+      <td width="50%"><img src="/src/assets/screenshots/The-Movie-Box-search.png"/></td>
+    </tr>
+  </tbody>
+    <thead>
+    <tr>
+      <th width="50%">Register Page</th>
+      <th width="50%">Login Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%"><img src="/src/assets/screenshots/The-Movie-Box-reg.png"/></td>
+      <td width="50%"><img src="/src/assets/screenshots/The-Movie-Box-loginpage.png"/></td>
+    </tr>
+  </tbody>
+</table>
