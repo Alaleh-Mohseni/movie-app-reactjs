@@ -1,6 +1,3 @@
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9e20b432-6b2a-4f8e-8ea9-0897837caeca/deploy-status)](https://app.netlify.com/sites/the-moviebox/deploys)
-
 # Movie API React App
 
 > A React app built using data from the [moviesapi](https://moviesapi.ir/)
